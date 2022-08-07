@@ -1,9 +1,11 @@
 <template>
     <div class="step1">
         <div class="step1__card">
-            <h2 class="step1__title">Hello there!</h2>
-            <p class="step1__paragraph">Let's buy some insurance. It is going to take only a few steps</p>
-            <Button type="primary" customWidth="200px" @clicked="storeWizard.nextStep">Start</Button>
+            <div class="step1__wrapper">
+                <h2 class="step1__title">Hello there!</h2>
+                <p class="step1__paragraph">Let's buy some insurance. <br>It is going to take only a few steps</p>
+                <Button type="primary" customWidth="200px" @clicked="storeWizard.nextStep">Start</Button>
+            </div>
         </div>
     </div>
 </template>
@@ -26,13 +28,18 @@ const storeWizard = useWizardStore();
             width: 50vw;
             height: 30vw;
             box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         &__title{
             font-size: 42px;
             font-weight: 700;
+            margin: 0 0 45px 0;
         }
         &__paragraph{
-            font-size: 20px;
+            font-size: 24px;
+            margin-bottom: 40px;
         }
         &__button{
             font-size: 20px;

@@ -30,8 +30,12 @@
                 <Button type="primary" @clicked="storeWizard.age >= 100 || storeWizard.age < 18 ? showError = true : storeWizard.nextStep">Next</Button>
             </div>
         </div>
-        <div clas="step2__ageError" v-if="showError">
-            Ooops
+        <div class="age-error" v-if="showError">
+            <h3 class="age-error__title">Ooops, there's a problem</h3>
+            <p class="age-error__text">Your age is not in our accepted range limit.<br>
+                We are sorry but we cannot insure you know.
+            </p>
+            <Button type="primary" customWidth="400px" @clicked="storeWizard.$reset()">Ok :(</Button>
         </div>
     </div>
 </template>
@@ -191,13 +195,22 @@ onUpdated(() => {
             justify-content: space-between;
             margin-top: 40px;
         }
-        &__ageError{
-            display: flex;
-            background: #FAFAFA;
-            width: 50vw;
-            align-items: center;
-            flex-direction: column;
-            padding: 30px 0 50px;
+    }
+    .age-error{
+        display: flex;
+        background: #FAFAFA;
+        width: 50vw;
+        align-items: center;
+        flex-direction: column;
+        padding: 30px 0 50px;
+        &__title{
+            font-size: 30px;
+            font-weight: 700;
+            margin: 20px;
+        }
+        &__text{
+            font-size: 24px;
+            margin-bottom: 30px;
         }
     }
 </style>
