@@ -1,6 +1,6 @@
 <template>
     <label class="label" :for="props.title">{{props.title}}</label>
-    <input @change="storeWizard.handleInput" class="input" type="text" :name="props.title" :placeholder="props.placeholderText"/>
+    <input  @change="storeWizard.handleInput" class="input" type="text" :name="props.title" :placeholder="props.placeholderText"/>
     <p class="error" v-if="errorMsg">{{props.title}} is misssing</p>
 </template>
 
@@ -8,7 +8,7 @@
 import { useWizardStore } from '../store/wizard'
 import { defineProps } from 'vue'
 
-const storeWizard = useWizardStore();
+    const storeWizard = useWizardStore();
 
     const props = defineProps({
         title: String,
@@ -18,6 +18,7 @@ const storeWizard = useWizardStore();
             default: false,
         },
     })
+
 </script>
 <style scoped lang="scss">
     .label{

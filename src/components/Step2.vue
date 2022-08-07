@@ -11,9 +11,9 @@
                         <option disabled selected>Select you option</option>
                         <option v-for="country in countriesList" :value="country" :key="country">{{ country }}</option>
                     </select>
-                    <div v-if="storeWizard.age > 17 && storeWizard.name != '' && storeWizard.country != ''" class="step2__package">
+                    <div v-if="storeWizard.age > 0 && storeWizard.name != '' && storeWizard.country != ''" class="step2__package">
                         <div class="step2__package-item" v-for="item in packageList" :key="item">
-                            <label><input type="radio" name="item" value="item">{{ packageString(item) }}</label>
+                            <label><input type="radio" name="item" value="item" @change="storeWizard.handlePackage(item)">{{ packageString(item) }}</label>
                         </div>
                     </div>
                 </form>
@@ -27,7 +27,7 @@
                 v-if="storeWizard.premium != 0"
                 class="step2__cta">
                 <Button type="secondary" @clicked="storeWizard.$reset()">Back</Button>
-                <Button type="primary" @clicked="storeWizard.age >= 100 || storeWizard.age < 18 ? showError = true : storeWizard.nextStep">Next</Button>
+                <Button type="primary" @clicked="(storeWizard.age >= 100 || storeWizard.age < 18) ? showError = true : storeWizard.nextStep()">Next</Button>
             </div>
         </div>
         <div class="age-error" v-if="showError">
@@ -72,7 +72,7 @@ const packageString = (item) => {
 }
 
 const calculateValues = () => {
-    if (storeWizard.age > 17 && storeWizard.name != '' && storeWizard.country != '') {
+    if (storeWizard.age > 0 && storeWizard.name != '' && storeWizard.country != '') {
         let value = 10 * storeWizard.age;
         switch(storeWizard.country) {
             case "USA":

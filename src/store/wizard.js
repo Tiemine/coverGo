@@ -7,7 +7,6 @@ export const useWizardStore = defineStore({
         name: '',
         age: 0,
         country: '',
-        currency: '',
         plan: '',
         premium: 0
     }),
@@ -25,6 +24,9 @@ export const useWizardStore = defineStore({
            let prop = evt.target.name.toLowerCase();
 
            this[prop] = evt.target.value;
+        },
+        handlePackage(item){
+            this.plan = item;
         },
         setPremium(value){
             this.premium = +value

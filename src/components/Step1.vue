@@ -41,15 +41,5 @@ const storeWizard = useWizardStore();
             font-size: 24px;
             margin-bottom: 40px;
         }
-        &__button{
-            font-size: 20px;
-            color: #fff;
-            background: rgb(14, 14, 14);
-            min-width: 220px;
-            border: 0;
-            border-radius: 5px;
-            padding: 20px;
-            cursor: pointer;
-        }
     }
 </style>
