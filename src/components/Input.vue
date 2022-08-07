@@ -19,7 +19,10 @@ import { ref, defineProps } from 'vue'
     const storeWizard = useWizardStore();
 
     const props = defineProps({
-        title: String,
+        title: {
+            type: String,
+            default: 'Name'
+        },
         placeholderText: String,
     })
 
