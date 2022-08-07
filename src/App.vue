@@ -1,15 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Step2 v-if="storeWizard.step === 2"/>
+  <Step1 v-else/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Step1 from './components/Step1.vue'
+import Step2 from './components/Step2.vue'
+import { useWizardStore } from './store/wizard'
+//import { ref } from 'vue'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    Step1,
+    Step2
+  },
+  setup() {
+    const storeWizard = useWizardStore();
+    return {
+      storeWizard
+    }
   }
 }
 </script>
@@ -20,7 +29,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #4a4a4a;
 }
 </style>
