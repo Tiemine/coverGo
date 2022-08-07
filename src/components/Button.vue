@@ -2,7 +2,8 @@
     <button 
         :class="['button', `button-${props.type}`, {'button--customWidth': props.customWidth != ''}]"
         @click="$emit('clicked')"
-        ><slot></slot></button>
+        ><slot></slot>
+    </button>
 </template>
 
 <script setup>
@@ -22,9 +23,11 @@ const props = defineProps({
 <style scoped lang="scss">
     .button{
         font-size: 20px;
+        font-family: 'IBM Plex Sans', sans-serif;
         border-radius: 5px;
         padding: 15px 40px;
-        border: 1px solid #202020;
+        font-weight: 700;
+        border: 3px solid #202020;
         cursor: pointer;
         &--customWidth{
             width: v-bind(customWidth);

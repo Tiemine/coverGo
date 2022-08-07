@@ -2,7 +2,9 @@
     <div class="step3">
         <div class="step3__card">
             <div class="step3__wrapper">
-                <h2 class="step3__title">Summary<br>{{storeWizard.name.split(' ')[0]}}</h2>
+                <h2 class="step3__title">
+                    Summary<br>{{storeWizard.name.split(' ')[0]}}
+                </h2>
                 <ul class="step3__data-list">
                     <li>Name: {{ storeWizard.name }}</li>
                     <li>Age: {{ storeWizard.age }}</li>
@@ -11,8 +13,16 @@
                     <li>Premium: {{ storeWizard.premium }}{{ storeWizard.getCurrency }}</li>                                      
                 </ul>
                 <div class="step3__cta">
-                    <Button type="secondary" @clicked="storeWizard.previousStep">Back</Button>
-                    <Button type="primary" @clicked="storeWizard.$reset()">Buy</Button>
+                    <Button 
+                        type="secondary" 
+                        @clicked="storeWizard.previousStep">
+                        Back
+                    </Button>
+                    <Button 
+                        type="primary" 
+                        @clicked="storeWizard.$reset()">
+                        Buy
+                    </Button>
                 </div>
             </div>
         </div>
@@ -35,11 +45,11 @@ const storeWizard = useWizardStore();
         &__card{
             background: #FAFAFA;
             width: 50vw;
-            height: 30vw;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 30px 0 50px;
         }
         &__title{
             font-size: 42px;

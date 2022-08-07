@@ -3,8 +3,15 @@
         <div class="step1__card">
             <div class="step1__wrapper">
                 <h2 class="step1__title">Hello there!</h2>
-                <p class="step1__paragraph">Let's buy some insurance. <br>It is going to take only a few steps</p>
-                <Button type="primary" customWidth="200px" @clicked="storeWizard.nextStep">Start</Button>
+                <p class="step1__paragraph">
+                    Let's buy some insurance. <br>It is going to take only a few steps
+                </p>
+                <Button 
+                    type="primary" 
+                    customWidth="200px" 
+                    @clicked="storeWizard.nextStep">
+                    Start
+                </Button>
             </div>
         </div>
     </div>
@@ -21,18 +28,20 @@ const storeWizard = useWizardStore();
     .step1{
         display: flex;
         height: 100vh;
+        font-family: 'IBM Plex Sans', sans-serif;
         justify-content: center;
         align-items: center;
         &__card{
             background: #FAFAFA;
             width: 50vw;
-            height: 30vw;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 50px 0 80px;
         }
         &__title{
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 42px;
             font-weight: 700;
             margin: 0 0 45px 0;

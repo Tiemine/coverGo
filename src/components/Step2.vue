@@ -7,27 +7,54 @@
                     <Input title="Name" placeholderText="Type your name"/>
                     <Input title="Age" placeholderText="Type your Age"/>
                     <label class="step2__label" for="country">Where do you live:</label>
-                    <select class="step2__select" name="country" @change="handleSelect">
-                        <option disabled selected>Select you option</option>
-                        <option v-for="country in countriesList" :value="country" :key="country">{{ country }}</option>
+                    <select 
+                        class="step2__select" 
+                        name="country" 
+                        @change="handleSelect">
+                        <option 
+                            disabled 
+                            :selected="storeWizard.country === ''">
+                            Select you option
+                        </option>
+                        <option 
+                            v-for="country in countriesList" 
+                            :value="country" 
+                            :key="country"
+                            :selected="storeWizard.country === country"
+                        >{{ country }}</option>
                     </select>
-                    <div v-if="storeWizard.age > 0 && storeWizard.name != '' && storeWizard.country != ''" class="step2__package">
-                        <div class="step2__package-item" v-for="item in packageList" :key="item">
-                            <label><input type="radio" name="item" value="item" @change="storeWizard.handlePackage(item)">{{ packageString(item) }}</label>
+                    <div 
+                        v-if="storeWizard.age > 0 && storeWizard.name != '' && storeWizard.country != ''" 
+                        class="step2__package">
+                        <div 
+                            class="step2__package-item" 
+                            v-for="item in packageList" 
+                            :key="item">
+                            <label>
+                                <input 
+                                    type="radio" 
+                                    name="item" 
+                                    value="item" 
+                                    @input="errorSelectPackage = false"
+                                    :checked="storeWizard.plan === item" 
+                                    @change="storeWizard.handlePackage(item)">
+                                {{ packageString(item) }}
+                            </label>
                         </div>
+                        <p v-if="errorSelectPackage" class="step2__error-msg">Choose one option</p>
                     </div>
                 </form>
             </div>
-            <h3 
-            class="step2__premium-value" 
-            v-if="storeWizard.premium != 0">
-            Your premium is: {{ storeWizard.premium }}{{ storeWizard.getCurrency }}
-            </h3>
             <div 
-                v-if="storeWizard.premium != 0"
-                class="step2__cta">
-                <Button type="secondary" @clicked="storeWizard.$reset()">Back</Button>
-                <Button type="primary" @clicked="(storeWizard.age >= 100 || storeWizard.age < 18) ? showError = true : storeWizard.nextStep()">Next</Button>
+                class="step2__result"
+                v-if="storeWizard.premium != 0 && storeWizard.age > 0 && storeWizard.name != ''">
+                <h3 class="step2__premium-value">
+                Your premium is: {{ storeWizard.premium }}{{ storeWizard.getCurrency }}
+                </h3>
+                <div class="step2__cta">
+                    <Button type="secondary" @clicked="storeWizard.$reset()">Back</Button>
+                    <Button type="primary" @clicked="validateFields">Next</Button>
+                </div>
             </div>
         </div>
         <div class="age-error" v-if="showError">
@@ -35,7 +62,12 @@
             <p class="age-error__text">Your age is not in our accepted range limit.<br>
                 We are sorry but we cannot insure you know.
             </p>
-            <Button type="primary" customWidth="400px" @clicked="storeWizard.$reset()">Ok :(</Button>
+            <Button 
+                type="primary" 
+                customWidth="400px" 
+                @clicked="storeWizard.$reset()">
+                Ok :(
+            </Button>
         </div>
     </div>
 </template>
@@ -49,11 +81,25 @@ import Button from '../components/Button.vue'
 const storeWizard = useWizardStore();
 const countriesList = ref(["Hong Kong", "USA", "Australia"]);
 const packageList = ref(["Standard", "Safe", "Super Safe"]);
-const showError = ref(false);
 
 const handleSelect = (evt) => {
     evt.preventDefault();
     storeWizard.selectCountry(evt.target.value);
+}
+
+const showError = ref(false);
+const errorSelectPackage = ref(false);
+const validateFields = () => {
+    if (storeWizard.age >= 100 || storeWizard.age < 18) {
+        showError.value = true
+    }
+    else if (storeWizard.plan === "") {
+        errorSelectPackage.value = true;
+    }
+    else {
+        errorSelectPackage.value = false;
+        storeWizard.nextStep()
+    }
 }
 
 const packageString = (item) => {
@@ -113,48 +159,59 @@ onUpdated(() => {
                 width: 300px;
             }
         }
+        &__result{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
         &__title{
             font-size: 42px;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-weight: 700;
         }
         &__label{
             color: #2c2c2c;
-            font-size: 16px;
+            font-size: 22px;
             display: block;
             text-align: left;
             margin: 15px 0 0;
         }
         &__select{
-            width: 100%;
-            border: 1px solid #cbcbcb;
             color: #4a4a4a;
+            font-size: 18px;
+            width: 100%;
+            border: 3px solid #cbcbcb;
             background: #fff;
             appearance: none;
-            font-size: 16px;
             padding: 12px;
             border-radius: 4px;
             margin-top: 15px;
             box-sizing: border-box;
             position: relative;
-            &::before{
-                content: 'a';
-                position: absolute;
-                width: 10px;
-                height: 10px;
-                background-color: red;
-            }
+            background-image: url('../assets/arrow.jpeg');
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: contain;
         }
         &__premium-value{
             font-size: 30px;
+        }
+        &__error-msg{
+            color: #ff6541;
+            font-size: 20px;
+            text-align: left;
+            font-weight: 700;
         }
         &__package{
             width: 100%;
             margin-top: 30px;
             &-item{
+                font-size: 20px;
                 text-align: left;
                 margin: 20px 0;
                 label{
                     display: flex;
+                    align-items: center;
                     gap: 10px;
                 }
                 input{
@@ -164,7 +221,7 @@ onUpdated(() => {
                     font: inherit;
                     width: 20px;
                     height: 20px;
-                    border: 1px solid #cacaca;
+                    border: 3px solid #cacaca;
                     border-radius: 50px;
                     display: flex;
                     justify-content: center;
