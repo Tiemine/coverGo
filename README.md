@@ -49,5 +49,5 @@ npm run serve
 ## 🔖 Explanations about the code and stack decisions
 
 You can check my stack and code decisions here at my [Technical Design](https://docs.google.com/document/d/1GXNAHYUsfRiTyGqmcR38W14m2sqKy4Tl5gFip2ne6NE/edit?usp=sharing)<br/>
-Watch [my Loom](https://www.loom.com/share/3c7d3a685c8d444db27444d9fcd9b023) explaining everything in details<br/>
+Watch [my Video](https://drive.google.com/file/d/1JWRoF5aIoyPvXo_Tn09e04dY1YYRaGZv/view?usp=sharing) explaining everything in details<br/>
 Check the working application deployed at [Amplify](https://main.d1sqdqrkx3ruzg.amplifyapp.com/)
